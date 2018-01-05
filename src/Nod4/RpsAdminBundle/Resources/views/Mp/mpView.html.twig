@@ -1,0 +1,76 @@
+{% extends 'RpsAdminBundle::layout.html.twig' %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    {% javascripts '@RpsAdminBundle/Resources/public/js/jquery.collection.js'
+    %}
+ <script src="{{ asset_url }}"></script>
+
+    {% endjavascripts  %}
+ <script type="text/javascript">
+     $('.images-collection,.images-collection2,.images-collection3').collection({
+         'add': '<a href="#" style="margin-left:20px" class="btn btn-default">Добавить</a>',
+         'remove': '<a href="#" class="btn btn-default">Удалить</a>',
+         allow_up: true,
+         allow_down: true,
+     });
+
+
+
+ </script>
+
+{% endblock %}
+
+
+
+
+{% block entity_content %}
+
+
+    {% form_theme form 'jquery.collection.html.twig'
+    'RpsAdminBundle:Mp:advanced-theme.html.twig'
+    %}
+
+    {% form_theme form2 'jquery.collection.html.twig'
+    'RpsAdminBundle:Mp:advanced-theme.html.twig'
+    %}
+    {% form_theme form3 'jquery.collection.html.twig'
+    'RpsAdminBundle:Mp:advanced-theme.html.twig'
+    %}
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#slider" data-toggle="tab">Слайдер</a></li>
+        <li><a href="#bar" data-toggle="tab">Плитка</a></li>
+        <li><a href="#line" data-toggle="tab">Одиночка</a></li>
+        <li><a href="#view_main" data-toggle="tab">Текущий вид главной</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="slider">
+            <div class="row"><div class="col-sm-8">{{ form(form) }}
+
+                </div></div>
+        </div>
+        <div class="tab-pane" id="bar">
+            <div class="row"><div class="col-sm-8">{{ form(form2) }}
+
+                </div></div>
+        </div>
+        <div class="tab-pane" id="line">
+            <div class="row"><div class="col-sm-8">{{ form(form3) }}
+
+                </div></div>
+        </div>
+        <div class="tab-pane" id="view_main">
+            <div class="row">
+                <ul>
+                {% for part in mpParts %}
+                    <li>{{ part.partName }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

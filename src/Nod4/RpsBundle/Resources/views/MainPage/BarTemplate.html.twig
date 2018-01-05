@@ -1,0 +1,31 @@
+<!-- Marketing messaging and featurettes
+   ================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      {#  <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
+            </label>
+        </div>#}
+        {%for news in object.content %}
+            <div class="col-lg-4">
+
+                <img class="img-rounded " src="{{news.getFirstImage}}" style="width: 15em; height: 15em;">
+                <p>{{news.dateUpdate | date('d-m-Y')}}</p><h4> {{news.fname}}</h4>
+                {% autoescape false %}
+                <p>{{news.getShortText()}}</p>
+                {% endautoescape %}
+                <p><a class="btn btn-default" href="{{path('content_view' , {'id': news.id})}}" role="button">Читать подробности</a></p>
+
+            </div><!-- /.col-lg-4 -->
+
+        {% endfor %}
+    </div><!-- /.row -->
+</div>

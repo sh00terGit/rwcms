@@ -1,0 +1,52 @@
+{% extends 'RpsBundle::layout.html.twig' %}
+{% block javascripts%}
+
+
+    {{ parent() }}
+    {% javascripts '@RpsAdminBundle/Resources/public/js/jYearSelect.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts  %}
+
+
+    <script>
+        {# для скрипта jYearSelect.js #}
+        YEARCHANGE_PATH = "{{ path('home_news_year_change') }}";
+    </script>
+{% endblock %}
+{% block entity_content %}
+
+    {# фильтр по году #}
+    {% include '@Rps/Default/templates/sidebar.html.twig' %}
+
+    <div id="newsCol">
+        {{ render(controller('RpsBundle:Default:ajaxSelect', {'year':  year, 'page': page } ) ) }}
+    </div>
+
+
+    <style>
+
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            font-size: larger;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #3DAAD3;
+            color: white;
+            border: 1px solid #3DAAD3;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #ddd;}
+    </style>
+
+
+
+
+{% endblock %}

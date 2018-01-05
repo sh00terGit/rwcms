@@ -1,0 +1,17 @@
+
+{% extends 'RpsAdminBundle:News:advanced-theme.html.twig' %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+        
+    {% if image_url is not null %}
+        <div style="display:none">  {{ block('form_widget') }}  </div>
+        <img src="{{ asset(image_url) }}" style="height: 160px;"/>
+        {%else%}
+          <div style="display:block">  {{ block('form_widget') }}  </div>
+           
+    {% endif %}
+
+    {% endspaceless %}
+{% endblock %}

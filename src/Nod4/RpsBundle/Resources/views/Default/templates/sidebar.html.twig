@@ -1,0 +1,20 @@
+<div class=" hidden-print panel panel-default">
+    <div class="panel-heading">Фильтр по году</div>
+    <div class="panel-body">
+        <ul id="years">
+            {% for selYear in arrYears %}
+                <li
+                        {% if selYear == year %}
+                            class="active"
+                        {% else %}
+                            class=""
+                        {% endif %}
+                >
+                    <a href="#"><b>{{ selYear }}</b></a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+

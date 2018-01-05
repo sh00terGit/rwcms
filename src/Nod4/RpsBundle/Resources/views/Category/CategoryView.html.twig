@@ -1,0 +1,45 @@
+{% extends 'RpsBundle::layout.html.twig' %}
+{% block javascripts%}
+
+
+    {{ parent() }}
+    {#
+     временно не работает т.к. в sidebar в ссылке href="#" #}
+    {% javascripts '@RpsAdminBundle/Resources/public/js/jYearSelect.js'
+
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts  %}
+
+
+    <script>
+        {# для скрипта jYearSelect.js #}
+        YEARCHANGE_PATH = "{{ path('category_year_change') }}";
+        CATEGORY = "{{category}}";
+    </script>
+{% endblock %}
+{% block entity_content %}
+
+    <div class="row">
+        <div class="col-md-9">
+            <div id="newsCol">
+                {{ render(controller('RpsBundle:Category:ajaxSelect', {'category' :category, 'year':  year, 'page': page } ) ) }}
+            </div>
+        </div>
+        {# фильтр по году#}
+        <div class="col-md-3 ">
+            <div class="row">
+                   <div class="col-md-12 col-xs-6">
+                    {% block sidebar %}
+                           <div class="" style="background: aliceblue; border-radius: 5px;">
+                           {% include '@Rps/Default/templates/sidebar.html.twig' %}
+
+                           </div>
+                    {% endblock %}
+                   </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

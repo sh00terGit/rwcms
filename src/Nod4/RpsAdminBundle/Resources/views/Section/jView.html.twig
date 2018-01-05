@@ -1,0 +1,71 @@
+{% extends '@RpsAdmin/layout.html.twig' %}
+    {% block javascripts %}
+        {{ parent() }}
+
+        <script>
+            $(function() {
+                $('#tree').jstree({
+                    'core' : {
+                        'multiple' : false,
+                        'data' : {
+                            'url' : "{{path('sec_tree') }}"
+                        },
+                        "check_callback" : true
+                    },
+                    "plugins" : [ "dnd" ],
+
+                });
+
+
+            });
+        </script>
+        <script>
+         AJAXMOVEMENTSECTIONPATH = "{{ path('sec_updateParent') }}";
+         AJAXDELETESECTIONPATH = "{{ path('sec_remove') }}";
+        </script>
+
+        {% javascripts
+        '@RpsAdminBundle/Resources/public/js/jstree/jstree.min.js'
+        '@RpsBundle/Resources/public/js/multilevelMenu.js'
+        '@RpsAdminBundle/Resources/public/js/jstree/jstree.dnd.js'
+        '@RpsAdminBundle/Resources/public/js/jstree/jstree_options.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+
+
+        {% endjavascripts %}
+
+    {% endblock %}
+
+
+{% block stylesheets %}
+    {{parent()}}
+    {% stylesheets
+    'bundles/rpsadmin/css/jsTree/style.css'  filter='cssrewrite'
+
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}
+
+
+
+
+
+{% block entity_content %}
+    <div class="row">
+        <div class="col-sm-4">
+            <div id="tree"></div>
+        </div>
+        <div class="col-sm-3">
+            <a href="{{ path('sec_new') }}" class="btn btn-success">Создать</a>
+            <br><br>
+            <a class="btn btn-warning" disabled="true" id="btn_sec_update">редактировать</a>
+            <br><br>
+            <a class="btn btn-danger" disabled="true" onclick="deleteNode()" id="btn_sec_delete">удалить</a>
+        </div>
+    </div>
+
+
+
+{% endblock %}

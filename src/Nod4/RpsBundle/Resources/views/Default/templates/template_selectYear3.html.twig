@@ -1,0 +1,14 @@
+<div class="col-md-offset-8 ">
+    <b>Год: </b>
+            {% for selYear in arrYears %}
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio"  name="year" value="{{ selYear }}"
+                            {% if selYear == year %} checked {% endif %}>
+                        {{ selYear }}
+                    </label>
+                </div>
+            {% endfor %}
+
+</div>
+<div class="clearfix"></div>

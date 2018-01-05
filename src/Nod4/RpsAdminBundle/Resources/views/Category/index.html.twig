@@ -1,0 +1,47 @@
+{% extends 'RpsAdminBundle:Datatable:list.html.twig' %}
+
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+    
+{{ datatable_js({
+        'id' : 'dta-offres',
+        'js' : {
+            'ajax' : path('cat_data'),
+            'columnDefs': [
+                { "width": "80%", "targets": 0 }
+            ],
+            "order": [[ 1, "desc" ]],
+            "paging": false,
+        },
+        
+    })
+}}
+
+    <script>
+        newsRemoveRoute = "{{path('cat_remove')}}";
+
+    </script>
+
+
+{% endblock %}
+
+{% block entity_content %}
+        <div class="col-sm-3">
+    <a href="{{path('cat_new')}}" class="btn btn-primary active" role="button">Создать новую</a>
+        </div>
+        <div class="col-sm-6">
+           <div id="flashMessage" class="bg-success h3 text-center">
+                
+            </div>
+        </div>
+   
+    
+    {{ datatable_html({
+            'id' : 'dta-offres'
+        })
+    }}
+   
+{% endblock  %}

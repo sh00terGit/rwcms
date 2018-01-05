@@ -1,0 +1,32 @@
+{% extends 'RpsAdminBundle:Datatable:list.html.twig' %}
+
+{% block entity_content %}
+
+    <div class="col-lg-12">
+        <div class="row">
+            <h3>Статистика посейщений по браузерам</h3>
+
+{% for browser in history| sort %}
+                <div class="col-lg-4">
+                    <b>{{ browser.browser }} v. {{ browser.ver }}</b>  <small>( {{ browser.view }} просмотров )</small>
+                </div>
+                <div class="col-lg-2"><small>последний вход {{ browser.dateUpdate |date("d/m/Y")  }}</small></div>
+                <div class="col-lg-6">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="{{ browser.percent }}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:{{ browser.percent }}%">
+                            {{ browser.percent }} %
+                        </div>
+                    </div>
+                </div>
+
+        {% endfor %}
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+

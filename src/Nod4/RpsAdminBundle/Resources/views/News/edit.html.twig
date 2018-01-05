@@ -1,0 +1,101 @@
+{% extends 'RpsAdminBundle::layout.html.twig' %} 
+{% block javascripts %}
+
+    {{ parent() }}   
+    {% javascripts '@RpsAdminBundle/Resources/public/js/jquery.collection.js'
+                   '@RpsAdminBundle/Resources/public/js/datepicker/*.js'
+                   '@RpsAdminBundle/Resources/public/js/jHtmlArea-0.8.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+
+    {% endjavascripts  %}
+    <script type="text/javascript">
+        $('.images-collection').collection({
+            'add': '<a href="#" style="margin-left:20px" class="btn btn-default">Добавить</a>',
+            'remove': '<a href="#" class="btn btn-default">Удалить</a>',
+            allow_up: false,
+            allow_down: false
+
+        });
+
+        $("textarea").htmlarea();
+
+
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 'bundles/rpsadmin/css/jhtmlArea/jHtmlArea.css'  filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}   
+
+
+
+{% block entity_content %}
+    <header>
+        <h1>Редактирование новости</h1>
+    </header>
+
+
+    <div class="row">   
+       
+        
+        {% form_theme form 'jquery.collection.html.twig'
+                           'RpsAdminBundle:News:advanced-theme.html.twig'
+                           'RpsAdminBundle:News:fields.html.twig'
+        %}
+
+
+
+
+        {{ form_start(form, {  'method': 'POST', 'attr': {'id': 'form'} }) }}
+
+        {{ form_errors(form) }}
+
+
+        {{ form_row(form.title) }}
+        {{ form_row(form.text) }}
+        
+        
+         {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="bg-success h3 text-center">
+                {{ flashMessage }}
+            </div>
+        {% endfor %} 
+        
+        
+        
+        <div class="col-sm-6">
+            {{ form_row(form.images) }}
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-6">
+                {{ form_row(form.date)  }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.save) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        
+
+
+
+    </div>
+
+
+
+    {#  для превью картинок 
+       <div class="row">
+           <ul class="js_file_list file-list" id="upload-list" style="display: none;">
+   
+           </ul>
+       </div>
+   
+   #}
+
+
+{% endblock %}

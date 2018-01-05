@@ -1,0 +1,36 @@
+{% extends 'RpsBundle::layout.html.twig' %}
+{% block title %}
+    {{news.title}}
+    {% endblock %}
+{% block entity_content %}
+
+        <div class="col-sm-2" style="background-color: #E5E5E5;">
+            <h4>{{news.date | date('d-m-Y') }}</h4>
+        </div>
+        <div class="col-sm-10">
+            <h3 style="margin-top: 0;">{{news.title}}</h3>
+        </div>
+        
+
+
+     <div class="col-sm-12">
+    <div class="news_content_text lead">
+        {% autoescape false %}
+        <p>{{news.text}}</p>
+        {% endautoescape %}
+    </div>
+     </div>
+
+<div class="row">
+    {%for image in news.images if news.images != null %}
+    <div class="col-sm-offset-1 col-sm-10">
+    <img src="{{image.getWebPath}}" style="margin-bottom:20px">
+    </div>
+    {%endfor%}
+</div>
+
+
+
+
+
+{% endblock %}

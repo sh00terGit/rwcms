@@ -1,0 +1,37 @@
+{% for section in sections %}
+    {# рисуем первый уровень #}
+    {% if section.children.count > 0 %}
+        <li class="dropdown">
+        {% if section.typeOutput=='full' %}
+        <a href="{{ path('category_view',{'id': section.category.id}) }}" class="dropdown-toggle" data-toggle="dropdown">{{ section.sname }} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+                    {{ render(controller(
+            'RpsBundle:Menu:RenderMenu',{'parent': section.id}
+            )) }}
+                </ul>
+            </li>
+
+        {% elseif section.typeOutput == 'enum' %}
+            <li class="dropdown">
+            <a href="{{ path('content_view',{'id': section.content.id}) }}" class="dropdown-toggle" data-toggle="dropdown">{{ section.sname }} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                {{ render(controller(
+                'RpsBundle:Menu:RenderMenu',{'parent': section.id}
+                )) }}
+            </ul>
+            </li>
+      {#  <li><a href="{{ path('content_view',{'id': section.content.id}) }}">{{ section.fname }}</a></li>#}
+        {% endif %}
+    {% endif %}
+    {# рисуем второй уровень #}
+    {% if section.children.count == 0 %}
+        {% if section.typeOutput=='full' %}
+            <li><a href="{{ path('category_view',{'id': section.category.id}) }}">{{ section.sname }}</a></li>
+            {% endif %}
+        {% if section.typeOutput=='enum' %}
+            <li><a href="{{ path('content_view',{'id': section.content.id}) }}">{{ section.sname }}</a></li>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+

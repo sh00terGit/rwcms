@@ -1,0 +1,38 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+  #настройка загрузки файлов
+  #rps.newsimage_uploader:
+   #     class: Nod4\RpsAdminBundle\FileUploader
+    #    arguments: ['%kernel.root_dir%/../web/uploads/news/images']
+        
+#  rps.image_listener:
+#        class: Nod4\RpsAdminBundle\EventListener\ImageUploadListener
+#        arguments: ['@rps.newsimage_uploader']
+#        tags:
+#            - { name: doctrine.event_listener, event: prePersist }
+#            - { name: doctrine.event_listener, event: preUpdate }   
+      
+# форма типа файл для картинок       
+  rps.image_type_extension:
+        class: Nod4\RpsAdminBundle\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, alias: file }
+
+  cms.ua.listener:
+        class: Nod4\RpsAdminBundle\EventListener\UserAgentListener
+        arguments:
+            - @service_container
+            - @doctrine.orm.entity_manager
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+
+  cms.main_page:
+      class: Nod4\RpsAdminBundle\Models\MainPage
+      arguments:
+            - @service_container
+

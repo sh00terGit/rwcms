@@ -1,0 +1,50 @@
+{% extends 'RpsAdminBundle::layout.html.twig' %} 
+{% block javascripts %}
+
+    {{ parent() }}   
+    {% javascripts
+                    '@RpsAdminBundle/Resources/public/js/sectionChoise.js'
+                    '@RpsAdminBundle/Resources/public/js/ajaxContentByCategory.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    <script>
+        CONTENTCHANGE_PATH = "{{ path('ajaxSelectContent') }}";
+    </script>
+
+
+    {% endjavascripts  %}
+
+{% endblock %}
+
+
+
+
+{% block entity_content %}
+    <header>
+        <h1>Создание нового раздела</h1>
+    </header>
+
+
+<div class="row">
+    <div class="col-md-5">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="bg-success h3">
+                {{ flashMessage }}
+            </div>
+        {% endfor %} 
+         {{ form_start(form, {  'method': 'POST', 'attr': {'id': 'form'} }) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_rest(form) }}
+    {#   {{ form_row(form.rest) }}
+#}
+        <div class="col-sm-6">
+                {{ form_row(form.save) }}
+            </div>
+        </div>
+
+</div>
+
+
+{% endblock %}

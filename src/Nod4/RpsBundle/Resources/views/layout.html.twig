@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 'bundles/rps/css/carousel.css'
+                   'bundles/rps/css/bootstrap.min.css'
+
+
+  filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}
+
+
+ {% block javascripts %}
+     {{ parent() }}
+     {% javascripts
+        '@RpsBundle/Resources/public/js/multilevelMenu.js'
+     %}
+     <script src="{{ asset_url }}"></script>
+     {% endjavascripts  %}
+
+ {% endblock %}
+
+
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+
+          <div class="container">
+
+
+            <div class="header" style="margin-bottom: 20px; margin-top: 10px;">
+                <div class="container"> 
+                    <div class="col-sm-3 visible-lg visible-md">
+                        <img style=" width: 100%;" src="{{ asset('bundles/rps/images/lblr.jpg') }}">
+                    </div>
+                    <div class="col-sm-9 visible-lg visible-md">
+                        <h1 class="text-primary" ><strong><em>
+                                    РАЙПРОФСОЖ
+                                    РУП " Гомельское отделение
+                                    Белорусской железной дороги"</em></strong></h1>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="navbar navbar-default " role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs" href="{{path('home_page')}}">РАЙПРОФСОЖ ГОМЕЛЬ</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav" id="menu">
+                        <li><a href="{{path('home_page')}}">Главная</a></li>
+                        {{ render(controller(
+                        'RpsBundle:Menu:RenderMenu'
+                        )) }}
+
+
+
+
+                       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                           <li ><a href="{{ path('admin_homepage') }}">Админка</a></li>
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+            <div id="content">    
+                {% block entity_content %}{entity_content}{% endblock  %}
+
+
+                <!--end of content -->
+            </div>
+
+
+            <div id="footer">
+                <hr class="featurette-divider">  
+                <p class="pull-right"><a href="#">Наверх</a></p>
+            </div>
+
+        </div>    
+        {% endblock %}
+
+
+

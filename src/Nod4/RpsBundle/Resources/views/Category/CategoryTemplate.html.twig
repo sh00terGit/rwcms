@@ -1,0 +1,43 @@
+
+{%for content in contents if contents != null %}
+    <div class="row" >
+        <div class="col-md-6 col-sm-6">
+            <h4>{{content.fname}}</h4>
+                <div class="label label-default lead" >{{content.dateUpdate | date('d-m-Y')}}</div>
+            {#<div class="label label-default col-md-4 col-sm-4 col-xs-4 lead" >{{content.dateUpdate | date('d-m-Y')}}</div>#}
+                <div class="clearfix"></div>
+
+           <p> <div class="" >{{content.getShortText()}}
+                <a href="{{path('content_view' , {'id': content.id})}}"  class="btn btn-xs btn-primary" role="button">&nbsp;&nbsp;Подробнее....</a>
+            </div></p>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <img class="img-responsive pull-right" style="height: 200px;" src="{{content.getFirstImage}}">
+        </div>
+    </div>
+{%endfor%}
+
+    {%if contents != null %}
+        <div style="text-align: center">
+            <!--paginate navigator-->
+            <ul  class="pagination">
+
+                {%for i in 1 .. countPages %}
+                    {%if i == page %}
+                       <li class="active"> <a  href="{{path('category_view',{'id':category, 'page': i})}}">
+                            {{i}}
+                           </a>
+                       </li>
+                    {%else%}
+                       <li> <a href="{{ path('category_view',{'id':category,'page': i,'year':  year }) }}">
+                            {{i}}
+                            </a>
+                       </li>
+                    {%endif%}
+                {%endfor%}
+            </ul>
+        </div>
+
+    {% endif %}
+
+

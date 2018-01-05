@@ -1,0 +1,40 @@
+
+
+        {% for news in newsArray %}
+            <div class="col-md-12">
+            <div class="col-md-7">
+                <h4>{{news.title}}</h4>
+
+                <div class="news_content_date col-md-2 col-sm-2 col-xs-4" style="background-color: #E5E5E5">{{news.date | date('d-m-Y')}}</div>
+                <div class="clearfix"></div>
+                <div class="" >{{news.getShortText()}}
+                    <a href="{{path('home_news_view' , {'id': news.id})}}"  class="btn btn-xs btn-primary" role="button">&nbsp;&nbsp;Подробнее....</a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive" style="height: 200px;" src="{{news.getFirstImage}}">
+            </div>
+            </div>
+        {% endfor %}
+
+    {%if newsArray != null %}
+        <div style="text-align: center">
+            <!--paginate navigator-->
+            <div  class="pagination">
+
+                {%for i in 1 .. countPages %}
+                    {%if i == page %}
+                        <a class="active" href="{{path('home_news',{'page': i})}}">
+                            {{i}}
+                        </a>
+                    {%else%}
+                        <a href="{{ path('home_news',{'page': i,'year':  year }) }}">
+                            {{i}}
+                        </a>
+                    {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+
+    {% endif %}
+

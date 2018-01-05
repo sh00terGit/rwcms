@@ -1,0 +1,31 @@
+{#<div  style="margin-bottom: 60px;"><h3 class="text-center text-primary featurette-heading">Наша работа</h3></div>#}
+
+{%for news in object.content %}
+<div class="row">
+
+   {% if loop.index is even %}
+        <div class="col-md-7">
+            <h5 class="featurette-heading"><a href="{{path('content_view' , {'id': news.id})}}">{{ news.fname }}</a></h5>
+            <p class="lead">
+       {% autoescape false %}   {{ news.getShortText() }} {% endautoescape %}
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive" src="{{news.getFirstImage()}}">
+        </div>
+
+   {% else %}
+       <div class="col-md-5">
+           <img class="featurette-image img-responsive" src="{{news.getFirstImage()}}">
+       </div>
+       <div class="col-md-7">
+           <h5 class="featurette-heading"><a href="{{path('content_view' , {'id': news.id})}}">{{ news.fname }}</a></h5>
+           <p class="lead">
+       {% autoescape false %} {{ news.getShortText() }} {% endautoescape %}
+           </p>
+       </div>
+    {% endif %}
+
+</div>
+<hr class="featurette-divider">
+{% endfor %}

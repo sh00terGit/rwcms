@@ -1,0 +1,36 @@
+{% extends 'RpsAdminBundle::layout.html.twig' %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    {% javascripts  '@RpsAdminBundle/Resources/public/js/datatables/jquery.dataTables.js'
+                    '@RpsAdminBundle/Resources/public/js/datatables/dataTables.bootstrap.js'
+                    '@RpsAdminBundle/Resources/public/js/jdelete.js'    
+    %}
+
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts  %}
+    <script>
+    newsRemoveRoute = "{{path('news_remove')}}";
+
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@RpsAdminBundle/Resources/public/css/datatables/*' %}
+    <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}    
+
+
+
+
+
+
+
+{% block entity_content %}
+
+{% endblock %}

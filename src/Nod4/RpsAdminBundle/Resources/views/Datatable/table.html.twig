@@ -1,0 +1,29 @@
+{% extends 'RpsAdminBundle:Datatable:list.html.twig' %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+{{ datatable_js({
+        'id' : 'dta-offres',
+        'js' : {
+            'ajax' : path('datatable'),
+            'columnDefs': [
+                 { "orderable": "false", "targets": "-2" }
+            ],
+            "paging": false,
+        },
+        
+    })
+}}
+
+{% endblock %}
+
+{% block entity_content %}
+    
+    {{ datatable_html({
+            'id' : 'dta-offres'
+        })
+    }}
+{% endblock  %}
+
