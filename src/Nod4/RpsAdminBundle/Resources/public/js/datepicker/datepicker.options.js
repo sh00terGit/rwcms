@@ -9,8 +9,9 @@ $(document).ready(function () {
         showOtherMonths: true,
         selectOtherMonths: true,
         dayNamesMin: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
-        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
+        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
             'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+
         dateFormat: "yy-mm-dd"
 
 });  

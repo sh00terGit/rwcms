@@ -40,7 +40,7 @@ twig:
         project: %project%
         images_directory: %images_directory%
     form:
-        resources: ['bootstrap_3_layout.html.twig']
+      resources:  ['RpsAdminBundle:Form:fields.html.twig']
       # resources: ['bootstrap_3_horizontal_layout.html.twig']    
         
 # Assetic Configuration
