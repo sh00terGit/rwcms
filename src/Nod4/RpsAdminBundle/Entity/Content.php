@@ -366,15 +366,23 @@ class Content
 
 
 
-    function getFirstImage() {
+    public function getFirstImage() {
         if( $this->getImages()->count() !== 0) {
 
             return $this->getImages()->first()->getWebPath();
         }
         else {
-            return "/web/images/none.jpg";
+            return $this->getDefaultImage();
         }
 
+    }
+
+    /**
+     * Get default image none.jpg
+     * @return string
+     */
+    public function getDefaultImage() {
+        return "/web/images/none.jpg";
     }
 
 

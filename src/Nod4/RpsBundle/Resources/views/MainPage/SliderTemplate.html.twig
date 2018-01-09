@@ -20,8 +20,9 @@
                 {% set i = i + 1 %}
 
 
-
+                {% if news.getFirstImage != news.getDefaultImage %}
                 <img src="{{news.getFirstImage}}" style="margin: 0;">
+                {% endif %}
                 <div class="carousel-caption">
                     <p>{{news.dateUpdate | date('d-m-Y')}}</p><h2 class="text-primary"> {{news.fname}} </h2>
                     {% autoescape false %}
