@@ -185,8 +185,8 @@ class NewsController extends Controller
         $response->setData($dataToReturn);
 
         $this->get('session')->getFlashBag()->add(
-            'success',
-            'Your product has been added to your cart.'
+            'error',
+            'Your name Andrey Shypul'
         );
 
         return $response;
