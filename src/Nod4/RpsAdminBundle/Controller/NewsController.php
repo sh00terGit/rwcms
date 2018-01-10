@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * @Route("/news")
  */
@@ -156,6 +156,40 @@ class NewsController extends Controller
             $em->flush();
         }
         return new Response('deleted');
+    }
+
+
+    /**
+     * @return Response
+     * @Route("/test",name="test")
+     */
+    public function testAction() {
+
+        return $this->render('RpsAdminBundle:News:test.html.twig');
+    }
+
+
+    /**
+     * @return JsonResponse
+     * @Route("/testAjax" ,name="testAjax")
+     */
+    public function testAjaxAction(){
+
+        $response = new JsonResponse();
+
+        $dataToReturn = array(
+            'name' => 'Andrey',
+            'surName' => 'Shipul'
+        );
+
+        $response->setData($dataToReturn);
+
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'Your product has been added to your cart.'
+        );
+
+        return $response;
     }
 
 }

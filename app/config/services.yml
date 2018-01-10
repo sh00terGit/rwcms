@@ -36,3 +36,9 @@ services:
       arguments:
             - @service_container
 
+  cms.flash_messenger:
+        class: Nod4\RpsAdminBundle\Models\Flash
+        arguments:
+              - @session
+        tags:
+            - { name: kernel.event_listener, event: kernel.response}

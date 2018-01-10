@@ -1,0 +1,38 @@
+{% extends 'RpsAdminBundle::layout.html.twig' %}
+{% block javascripts %}
+
+    {{ parent() }}
+<script>
+
+    CONTENTCHANGE_PATH = "{{ path('testAjax') }}";
+
+    $(document).on('click', '#btn1', function () {
+
+        $.ajax({
+            url: CONTENTCHANGE_PATH,
+            data: 'category='+ $('#sectionForm_category').val(),
+            cache: false,
+            beforeSend: function () {
+            },
+            complete: function (data) {
+                var content = $.parseJSON(data.responseText);
+                var options = '<option value="">Выберите..</option>';
+                $(content).each(function () {
+                    options += '<option value="' + $(this).attr('id') + '">' +  $(this).attr('fname') + '</option>';
+                });
+                $('#sectionForm_content').html(options);
+
+            }
+        });
+    });
+
+</script>
+{% endblock %}
+
+
+
+
+{% block entity_content %}
+
+    <button id="btn1">Кнопка</button>
+{% endblock %}
