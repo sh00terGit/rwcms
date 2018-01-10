@@ -5,6 +5,7 @@ namespace Nod4\RpsAdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\Length;
 
 class CategoryType extends AbstractType
 {
@@ -16,11 +17,11 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('fname',null,array(
-                'label' => 'Название'
+                'label' => 'Название' , 'constraints' => new Length(array('min' => 3)),
             ))
             ->add('sname',null, array(
                 'label' => 'Коротное название',
-                'required' => false,
+                'constraints' => new Length(array('min' => 3)),
             ))
             ->add('description',null,array(
                 'label' => 'Описание',

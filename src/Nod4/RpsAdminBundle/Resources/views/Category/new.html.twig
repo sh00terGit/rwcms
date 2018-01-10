@@ -57,8 +57,6 @@
 
         {{ form_start(form, {  'method': 'POST', 'attr': {'id': 'form'} }) }}
 
-        {{ form_errors(form) }}
-
 
         {{ form_row(form.fname) }}
         {{ form_row(form.sname) }}
@@ -67,24 +65,11 @@
          <div class="col-sm-6">
                 {{ form_row(form.save) }}
             </div>
-        </div>
+
         {{ form_rest(form) }}
-
-
-
 
     </div>
 
-
-
-    {#  для превью картинок 
-       <div class="row">
-           <ul class="js_file_list file-list" id="upload-list" style="display: none;">
-   
-           </ul>
-       </div>
-   
-   #}
 
 
 {% endblock %}

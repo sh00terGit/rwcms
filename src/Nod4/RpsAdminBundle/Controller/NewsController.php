@@ -2,7 +2,9 @@
 
 namespace Nod4\RpsAdminBundle\Controller;
 
+use Nod4\RpsAdminBundle\Entity\Category;
 use Nod4\RpsAdminBundle\Entity\News;
+use Nod4\RpsAdminBundle\Form\CategoryType;
 use Nod4\RpsAdminBundle\Form\NewsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -165,7 +167,15 @@ class NewsController extends Controller
      */
     public function testAction() {
 
-        return $this->render('RpsAdminBundle:News:test.html.twig');
+        $category = new Category();
+        $category->setFname('Cat1');
+
+        $form = $this->createForm(new CategoryType(),$category , array(
+            'action' => $this->generateUrl('testAjax'), 'attr' => array('id' => 'category')
+        ));
+        return $this->render('RpsAdminBundle:News:test.html.twig' , array(
+            'form' => $form->createView()
+        ));
     }
 
 
@@ -173,23 +183,25 @@ class NewsController extends Controller
      * @return JsonResponse
      * @Route("/testAjax" ,name="testAjax")
      */
-    public function testAjaxAction(){
+    public function testAjaxAction(Request $request){
+        $category = new Category();
+        $form = $this->createForm(new CategoryType(),$category);
+        $form->handleRequest($request);
 
-        $response = new JsonResponse();
+        if($form->isValid()){
+            $this->get('session')->getFlashBag()->add(
+                'success',"Сохранено успешно");
+        } else {
+            foreach ($form->getErrors(true)  as $key => $error) {
+                $this->get('session')->getFlashBag()->add(
+                    'info',$error->getMessage()
+                );
+            }
+        }
+        return new JsonResponse();
 
-        $dataToReturn = array(
-            'name' => 'Andrey',
-            'surName' => 'Shipul'
-        );
 
-        $response->setData($dataToReturn);
 
-        $this->get('session')->getFlashBag()->add(
-            'error',
-            'Your name Andrey Shypul'
-        );
-
-        return $response;
     }
 
 }

@@ -43,12 +43,13 @@ class CategoryController extends Controller
     /**
      * @Route("/{id}/{year}/{page}", name="category_view",
      *     requirements={"year" = "\d+" , "page" = "\d+" ,"id" = "\d+" },
-     *     defaults={"year" = 2017, "page" = 1})
+     *     defaults={"year" = 0, "page" = 1})
      * @param int $year
      * @param int $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function categoryAction($id,$year ,$page) {
+        $year = $year == 0 ? $this->currYear : $year;
 
         $years = $this->genYears($this->currYear,$this->limitYears);
 
@@ -66,13 +67,15 @@ class CategoryController extends Controller
      * @return Response json
      */
     public function ajaxSelectAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
         $year = $request->get('year');
         $page =  $request->get('page');
-        $category =  $request->get('category');
-        $em = $this->getDoctrine()->getManager();
+        $categoryId =  $request->get('category');
+        $category = $em->getRepository('RpsAdminBundle:Category')->find($categoryId);
+
         $contents = $em->getRepository('RpsAdminBundle:Content')
-            ->findCategoryPageByYear($category,$year, $page, $this->limitNewsPerPage);
-        $countPages = $this->countPagesByYear($category,$year);
+            ->findCategoryPageByYear($categoryId,$year, $page, $this->limitNewsPerPage);
+        $countPages = $this->countPagesByYear($categoryId,$year);
 
         $years = $this->genYears($year,$this->limitYears);
 

@@ -17,7 +17,9 @@ class Category
      * @var string
      *
      * @ORM\Column(name="fname", type="string", length=100, nullable=false)
+
      */
+
     private $fname;
 
     /**

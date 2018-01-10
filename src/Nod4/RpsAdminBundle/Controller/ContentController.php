@@ -102,7 +102,7 @@ class ContentController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-           // $this->get('session')->getFlashBag()->add('notice', 'Сохранено успешно!');
+          //  $this->get('session')->getFlashBag()->add('notice', 'Сохранено успешно!');
             return $this->redirect($this->generateUrl('content_list'));
         }
         return $this->render('RpsAdminBundle:Content:edit.html.twig', array(

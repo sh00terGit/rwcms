@@ -27,6 +27,28 @@
     });
 
 
+
+
+    $("#category").submit(function(e) {
+       var data = $(this).serialize();
+
+
+        $.ajax({
+            type: "POST",
+            url: CONTENTCHANGE_PATH,
+            data: data , // serializes the form's elements.
+            success: function()
+            {
+
+
+          /*     alert(data); // show response from the php script.
+*/
+            }
+        });
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
+
+
     (function($) {
         var methods = {
             init: function(options) {
@@ -151,7 +173,7 @@
         };
 
         $.fn.flashNotification.defaults = {
-            'hideDelay'         : 100000,
+            'hideDelay'         : 3000,
             'autoHide'          : false,
             'animate'           : true
         };
@@ -167,12 +189,9 @@
 
 
 {% block entity_content %}
-    <button id="btn1">Кнопка</button>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+      {# <button id="btn1">Кнопка</button>#}
     <p> {{ include('RpsAdminBundle:News:flashMessages.html.twig') }}</p>
-    {#<div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Warning!</strong> Better check yourself, you're not looking too good.
-    </div>#}
-
 
 {% endblock %}
