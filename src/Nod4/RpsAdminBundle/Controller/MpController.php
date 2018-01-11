@@ -61,25 +61,31 @@ class MpController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find entity MpPart.');
         }
+
         switch ($entity->getPartName()){
             case "MpSlider" :
                 $form = $this->createForm(new MpPartType(), $entity);
-
+                $formname = 'Слайдер';
                 break;
             case "MpBar" :
                 $form = $this->createForm(new MpPart2Type(), $entity);
-
+                $formname = 'Плитка';
                 break;
             case "MpLine" :
                 $form = $this->createForm(new MpPart3Type(), $entity);
-
+                $formname = 'Одиночка';
                 break;
         }
-        $form->handleRequest($request);
-        $em = $this->getDoctrine()->getManager();
-        if ($form->isValid() ) {
-            $em->persist($entity);
-            $em->flush();
+        if(isset($form)) {
+            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            if ($form->isValid() ) {
+                $em->persist($entity);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add(
+                    'success', $formname . ' cохранён успешно'
+                );
+            }
         }
         return $this->redirect($this->generateUrl('mp_view'));
     }

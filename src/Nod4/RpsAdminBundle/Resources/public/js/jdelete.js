@@ -10,14 +10,6 @@ $(document).on('click', '.ajaxDelete', function () {
     })
     .done(function () {
         link.parent().parent().hide('slow');
-         	
-       $('#flashMessage').show(200, function(){
-       $('#flashMessage').html('Операция произведена успешно!');	
-      setTimeout(function(){
-        $('#flashMessage').hide(500);
-      }, 3000);
-    });         
-        
     });
 });
 

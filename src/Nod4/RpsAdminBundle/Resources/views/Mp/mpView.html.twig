@@ -3,7 +3,8 @@
 {% block javascripts %}
 
     {{ parent() }}
-    {% javascripts '@RpsAdminBundle/Resources/public/js/jquery.collection.js'
+    {% javascripts  '@RpsAdminBundle/Resources/public/js/jquery.collection.js'
+                    '@RpsAdminBundle/Resources/public/js/flashNotification.js'
     %}
  <script src="{{ asset_url }}"></script>
 
@@ -13,7 +14,7 @@
          'add': '<a href="#" style="margin-left:20px" class="btn btn-default">Добавить</a>',
          'remove': '<a href="#" class="btn btn-default">Удалить</a>',
          allow_up: true,
-         allow_down: true,
+         allow_down: true
      });
 
 
@@ -49,6 +50,7 @@
     <div class="tab-content">
         <div class="tab-pane active" id="slider">
             <div class="row"><div class="col-sm-8">{{ form(form) }}
+            <p> {{ include('RpsAdminBundle:form:flashMessages.html.twig') }}</p>
 
                 </div></div>
         </div>

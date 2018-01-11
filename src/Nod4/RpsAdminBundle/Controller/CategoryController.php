@@ -93,6 +93,9 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'success',$entity->getSname().' cохранено успешно'
+            );
             return $this->redirect($this->generateUrl('cat_list'));
 
         }
@@ -115,6 +118,9 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'success',$entity->getSname().' cохранено успешно'
+            );
             return $this->redirect($this->generateUrl('cat_list'));
         }
 
@@ -149,7 +155,9 @@ class CategoryController extends Controller
         if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
             $enquiry = $em->getRepository('RpsAdminBundle:Category')->find($request->get('id'));
-
+            $this->get('session')->getFlashBag()->add(
+                'success',$enquiry->getSname().' успешно удалено'
+            );
             $em->remove($enquiry);
             $em->flush();
         }

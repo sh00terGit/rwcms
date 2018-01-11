@@ -7,13 +7,14 @@
 
     {% javascripts  '@RpsAdminBundle/Resources/public/js/datatables/jquery.dataTables.js'
                     '@RpsAdminBundle/Resources/public/js/datatables/dataTables.bootstrap.js'
-                    '@RpsAdminBundle/Resources/public/js/jdelete.js'    
+                    '@RpsAdminBundle/Resources/public/js/jdelete.js'
+                    '@RpsAdminBundle/Resources/public/js/flashNotification.js'
     %}
 
     <script src="{{ asset_url }}"></script>
     {% endjavascripts  %}
     <script>
-    newsRemoveRoute = "{{path('news_remove')}}";
+        newsRemoveRoute = "{{path('news_remove')}}";
 
     </script>
 {% endblock %}

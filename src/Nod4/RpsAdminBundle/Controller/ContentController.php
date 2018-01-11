@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/content")
@@ -22,7 +23,8 @@ class ContentController extends Controller
      */
     public function indexAction()
     {
-        $this->datatable()->execute();                                                         // call the datatable config initializer
+        $this->datatable()->execute();
+
         return $this->render('RpsAdminBundle:Content:index.html.twig');
     }
 
@@ -102,7 +104,9 @@ class ContentController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-          //  $this->get('session')->getFlashBag()->add('notice', 'Сохранено успешно!');
+            $this->get('session')->getFlashBag()->add(
+                'success',$entity->getSname().' cохранено успешно'
+            );
             return $this->redirect($this->generateUrl('content_list'));
         }
         return $this->render('RpsAdminBundle:Content:edit.html.twig', array(
@@ -124,6 +128,9 @@ class ContentController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'success',$entity->getSname().' cохранено успешно'
+            );
             return $this->redirect($this->generateUrl('content_list'));
         }
 
@@ -135,7 +142,7 @@ class ContentController extends Controller
     /**
      * Creates a form to edit a  entity.
      *
-     * @param InfoContent $entity The entity
+     * @param Content $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -161,8 +168,11 @@ class ContentController extends Controller
 
             $em->remove($enquiry);
             $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                'success',$enquiry->getSname().' успешно удалено'
+            );
         }
-        return new Response('deleted');
+        return new JsonResponse();
     }
 
 }

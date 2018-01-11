@@ -32,16 +32,12 @@
         <div class="col-sm-3">
     <a href="{{path('content_new')}}" class="btn btn-primary active" role="button">Создать новую</a>
         </div>
-        <div class="col-sm-6">
-           <div id="flashMessage" class="bg-success h3 text-center">
-                
-            </div>
-        </div>
-   
-    
+        <div class="col-sm-6">{{ include('RpsAdminBundle:Form:flashMessages.html.twig') }}</div>
+
+
     {{ datatable_html({
             'id' : 'dta-offres'
         })
     }}
-   
+
 {% endblock  %}

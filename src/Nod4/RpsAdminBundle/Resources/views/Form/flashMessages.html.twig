@@ -2,7 +2,7 @@
     {% for flashMessage in app.session.flashbag.get('success') %}
         <div class="alert alert-success"  role="alert">
             <button class="close" data-dismiss="alert">&times;</button>
-            {{ flashMessage|trans|raw|nl2br }}
+            <b>{{ flashMessage|trans|raw|nl2br }}</b>
         </div>
     {% endfor %}
 
